@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ring
+  - Shank
+  - Dot
+  - CapsuleShape
   layers:
   - Default
   - TransparentFX
@@ -41,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Shank
+    uniqueID: 846597867
+    locked: 0
+  - name: Ring
+    uniqueID: 1431081527
+    locked: 0
+  - name: Dot
+    uniqueID: 970073007
+    locked: 0
+  - name: CapsuleShape
+    uniqueID: 4249608701
     locked: 0
