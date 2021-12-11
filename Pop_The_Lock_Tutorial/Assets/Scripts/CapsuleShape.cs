@@ -9,20 +9,23 @@ public class CapsuleShape : MonoBehaviour
     [SerializeField]
     private bool isLeftOrRight; // true is right, false is left...
 
+    private float rotationSpeed;
+
     void Start()
     {
         isLeftOrRight = true;
+        rotationSpeed = 50.0f;
     }
 
     void Update()
     {
         if(isLeftOrRight)
         {
-            transform.RotateAround(ring.position, Vector3.back, 20.0f * Time.deltaTime);
+            transform.RotateAround(ring.position, Vector3.back, rotationSpeed * Time.deltaTime);
         }
         else
         {
-            transform.RotateAround(ring.position, Vector3.forward, 20.0f * Time.deltaTime);
+            transform.RotateAround(ring.position, Vector3.forward, rotationSpeed * Time.deltaTime);
         }
     }
 

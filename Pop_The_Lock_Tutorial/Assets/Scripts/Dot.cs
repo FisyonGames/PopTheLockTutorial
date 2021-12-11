@@ -9,6 +9,10 @@ public class Dot : MonoBehaviour
     {
         CreateNewDotRotation();
     }
+    void OnEnable()
+    {
+        CreateNewDotRotation();
+    }
 
     void Update()
     {
