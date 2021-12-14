@@ -1,35 +1,57 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour{
-    public Transform dot;
-    public Transform capsuleShape;
-
+    public Transform dot, dotSprite, capsuleShape, cam;
+    public Text scoreText, bestScoreText;
     public bool isReadyForPoint;
-    //public bool isClickMouseButton;
+    public bool isGamePlayed;
 
     private Dot m_dot;
     private CapsuleShape m_capsuleShape;
+    private DotSpriteCollider m_dotSpriteCollider;
+    private CameraFailMovement m_cameraFailMovement;
+    private BackgroundColor m_backgroundColor;
+
+    private int count = 0;
+    private int bestScore;
+    
 
     void Awake()
     {
         m_dot = dot.gameObject.GetComponent<Dot>();
         m_capsuleShape = capsuleShape.gameObject.GetComponent<CapsuleShape>();
+        m_dotSpriteCollider = dotSprite.gameObject.GetComponent<DotSpriteCollider>();
+        m_cameraFailMovement = cam.GetComponent<CameraFailMovement>();
+        m_backgroundColor = cam.GetComponent<BackgroundColor>();
+
+        m_cameraFailMovement.enabled = false;
+        m_capsuleShape.enabled = false;
     }
 
     void Start()
     {
-        //isClickMouseButton = false;  
+        isReadyForPoint = false;
+        isGamePlayed = false;
+
+        bestScore = PlayerPrefs.GetInt("bestScore");
+        count = 0;
+        SetCountText();
+        //PlayerPrefs.DeleteKey("highScore");
+        
+        m_dot.CreateNewDotRotation();
     }
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && Input.mousePosition.y < Screen.height/2 && isGamePlayed)
         {
-            //isClickMouseButton = true;
             if(isReadyForPoint)
             {
+                m_dotSpriteCollider.insider = true;
                 SetCount();
             }
             else
@@ -37,32 +59,44 @@ public class GameController : MonoBehaviour{
                 Fail();
             }
         }
+        if(Input.GetMouseButtonDown(0) && Input.mousePosition.y < Screen.height/2 && !isGamePlayed)
+        {
+            m_capsuleShape.enabled = true;
+            isGamePlayed = true;
+        }
     }
 
     void SetCount()
     {
-        print("SAYIIIII......");
-        //Destroy(dot.gameObject);
-        //dot.gameObject.SetActive(false);
+        count++;
+        SetCountText();
         m_capsuleShape.ChangeRotateDirection();
-        //dot.gameObject.SetActive(true);
         m_dot.CreateNewDotRotation();
-        //isClickMouseButton = false;
+        isReadyForPoint = false;
     }
 
     public void Fail()
     {
-        print("MISS.......");
-        PauseGame();  
-        //isClickMouseButton = false;  
+        print("....");
+        m_capsuleShape.enabled = false;     //Capsule'ün hareketi durduruluyor ve camera final hareketi başlatılıyor.
+        m_backgroundColor.ChangeBackgroundColor();
+        m_cameraFailMovement.enabled = true;
     }
 
-    void PauseGame()
+    public void PauseGame()
     {
         Time.timeScale = 0;
+        isReadyForPoint = false;
     }
-    void ResumeGame()
-    {
-        Time.timeScale =1;
-    }
+
+    void SetCountText()
+	{
+		scoreText.text = count.ToString();
+		if (count >= bestScore) 
+		{
+            PlayerPrefs.SetInt("bestScore", count);
+            PlayerPrefs.Save();
+		}
+        bestScoreText.text = "Best: " + PlayerPrefs.GetInt("bestScore").ToString();
+	}
 }

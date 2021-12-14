@@ -4,24 +4,18 @@ using UnityEngine;
 
 public class Dot : MonoBehaviour
 {
-
+    void Awake()
+    {
+        
+    }
     void Start()
-    {
-        CreateNewDotRotation();
-    }
-    void OnEnable()
-    {
-        CreateNewDotRotation();
-    }
-
-    void Update()
     {
         
     }
 
     public void CreateNewDotRotation()
     {
-        Quaternion rotation = Quaternion.Euler(0, 0, Random.Range(0f, 360.0f));
+        Quaternion rotation = Quaternion.Euler(0, 0, transform.rotation.eulerAngles.z + Random.Range(180.0f, 300.0f));
         transform.rotation = rotation;
     }
 }

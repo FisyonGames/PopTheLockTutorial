@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class CapsuleShape : MonoBehaviour
 {
-    public Transform ring;
+    public Transform ring, dot;
 
     [SerializeField]
     private bool isLeftOrRight; // true is right, false is left...
 
-    private float rotationSpeed;
+    public float rotationSpeed;
 
-    void Start()
+    void OnEnable()
     {
-        isLeftOrRight = true;
-        rotationSpeed = 50.0f;
+        if(dot.rotation.eulerAngles.z <= 180.0f) 
+            isLeftOrRight = false;
+        else 
+            isLeftOrRight = true;
+
+        print("dot.rotation.eulerAngles.z: " + dot.rotation.eulerAngles.z);
+        print("dot.rotation.z: " + dot.rotation.z);
     }
 
     void Update()
@@ -31,7 +36,9 @@ public class CapsuleShape : MonoBehaviour
 
     public void ChangeRotateDirection()
     {
-        if(isLeftOrRight) isLeftOrRight = false;
-        else isLeftOrRight = true;
+        if(isLeftOrRight) 
+            isLeftOrRight = false;
+        else 
+            isLeftOrRight = true;
     }
 }

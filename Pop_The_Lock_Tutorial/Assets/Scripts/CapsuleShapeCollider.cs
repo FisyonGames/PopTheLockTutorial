@@ -7,7 +7,7 @@ public class CapsuleShapeCollider : MonoBehaviour
     public Transform gameController;
     private GameController m_gameController;
 
-    void Start()
+    void Awake()
     {
         m_gameController = gameController.gameObject.GetComponent<GameController>();
     }
