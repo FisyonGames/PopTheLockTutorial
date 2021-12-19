@@ -6,12 +6,12 @@ public class CameraFailMovement : MonoBehaviour
 {
 
     public float speed;
+    public Transform gameController;
 
     private Quaternion from;
     private Quaternion to;
     private float timeCount = 0.0f;
     private float timeCount_02 = 0.0f;
-    public Transform gameController;
     private GameController m_gameController;
 
     void Awake()

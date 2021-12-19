@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5a091a9592579594487b37ab2df9801c
+guid: 6bf6ac0dacc882744bedd81c3a248382
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Mouse Memoirs
+  - Fonarto
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

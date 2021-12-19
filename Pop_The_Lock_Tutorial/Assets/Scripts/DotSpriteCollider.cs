@@ -12,7 +12,6 @@ public class DotSpriteCollider : MonoBehaviour
     void Start()
     {
         m_gameController = gameController.gameObject.GetComponent<GameController>();
-        //insider = false;
     }
 
     void OnTriggerEnter2D(Collider2D coll)
@@ -33,9 +32,7 @@ public class DotSpriteCollider : MonoBehaviour
     {
         if(coll.gameObject.tag == "CapsuleShape" && !insider)
         {
-            //m_gameController.isReadyForPoint = false;
             m_gameController.Fail();
-            //gameObject.SetActive(false);
         }
         if(insider)
         {
@@ -43,15 +40,4 @@ public class DotSpriteCollider : MonoBehaviour
             m_gameController.isReadyForPoint = false;
         }
     }
-    /*
-    void OnDisable()
-    {
-        gameObject.SetActive(false);
-    }
-
-    void OnEnable()
-    {
-        insider = false;
-    }
-    */
 }

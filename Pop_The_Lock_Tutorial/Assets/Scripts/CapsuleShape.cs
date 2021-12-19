@@ -8,18 +8,14 @@ public class CapsuleShape : MonoBehaviour
 
     [SerializeField]
     private bool isLeftOrRight; // true is right, false is left...
-
-    public float rotationSpeed;
+    
+    [SerializeField]
+    private float rotationSpeed;
 
     void OnEnable()
     {
-        if(dot.rotation.eulerAngles.z <= 180.0f) 
-            isLeftOrRight = false;
-        else 
-            isLeftOrRight = true;
-
-        print("dot.rotation.eulerAngles.z: " + dot.rotation.eulerAngles.z);
-        print("dot.rotation.z: " + dot.rotation.z);
+        isLeftOrRight = dot.rotation.eulerAngles.z <= 180.0f ? false : true;
+        rotationSpeed = PlayerPrefs.GetInt("level") == 1 ? 50 : 150;
     }
 
     void Update()
@@ -36,9 +32,6 @@ public class CapsuleShape : MonoBehaviour
 
     public void ChangeRotateDirection()
     {
-        if(isLeftOrRight) 
-            isLeftOrRight = false;
-        else 
-            isLeftOrRight = true;
+        isLeftOrRight = isLeftOrRight ? false : true;
     }
 }
